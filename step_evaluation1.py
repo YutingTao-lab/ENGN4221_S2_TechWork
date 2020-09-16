@@ -6,7 +6,7 @@ Created on Wed Sep  9 17:23:53 2020
 @author: ziling
 """
 
-import simpy
+import sympy
 from simpy.events import AllOf
 import pandas as pd
 import  xdrlib ,sys
@@ -47,29 +47,34 @@ def excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1')
     i = 0 #行序号
     row0=table.row_values(0)
     row0.pop(1)
+    row2=[]
     	#写第一行
     for i in range(0,len(row0)):
         sheet1.write(0,i,str(row0[i]))
         book.save('new_dataset.xls')
     t = 1
+    c=1
+    y=0
     for j in stakeholders:
         if j == 1.0:
             row=table.row_values(t)
             row.pop(1)
             row1 = row[0:len(row)-3]
-            y = 0
             for m in row1:
                 if type(m) is float:
                     if m <= time_max[y]:
                         row1 = [' ' if x == m else x for x in row1]
-                        row2 = row1+row[-3:]
-                y = y+1
-            for i in range(0,len(row2)):
-                sheet1.write(t,i,str(row2[i]),set_style('Times New Roman',220,True))
+            y = y+1
+            for i in range(0,len(row1)+3):
+                row2=row1+row[-3:]
+                print(row2)
+                sheet1.write(c,i,str(row2[i]),set_style('Times New Roman',220,True))
                 book.save('new_dataset.xls')
-            t = t+1
+            c = c+1
+        t = t+1
     return 'new_dataset.xls'
 
 if __name__ =="__main__":
   excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1')
+
 
