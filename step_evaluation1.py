@@ -21,7 +21,7 @@ def open_excel(file= 'Data_set.xlsx'):
     except Exception:
         print (str(e))
 
-#根据名称获取Excel表格中的数据   参数:file：Excel文件路径     colnameindex：表头列名所在行的索引  ，by_name：Sheet1名称
+#get data from excel based on the name   parameters:file：Excel path     colnameindex：index of column name  ，by_name：name of Sheet1
 def set_style(name,height,bold=False):
 	style = xlwt.XFStyle()
 	font = xlwt.Font()
@@ -38,17 +38,17 @@ def feasible_dataset():
     
 def excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1'):
     time_max = feasible_dataset()
-    data = open_excel(file) #打开excel文件
-    table = data.sheet_by_name(by_name) #根据sheet名字来获取excel中的sheet
-   # nrows = table.nrows #行数 
-    stakeholders = table.col_values(1)[1:] #某一列数据 
-    book = xlwt.Workbook() #创建一个Excel
-    sheet1 = book.add_sheet('new_dataset') #在其中创建一个名为hello的sheet
-    i = 0 #行序号
+    data = open_excel(file) #open excel
+    table = data.sheet_by_name(by_name) #get sheet from excel file based on sheet name
+   # nrows = table.nrows #number of rows
+    stakeholders = table.col_values(1)[1:] #data of one col
+    book = xlwt.Workbook() #create an Excel
+    sheet1 = book.add_sheet('new_dataset') #creat a sheet
+    i = 0 #index of row
     row0=table.row_values(0)
     row0.pop(1)
     row2=[]
-    	#写第一行
+    	#write first row
     for i in range(0,len(row0)):
         sheet1.write(0,i,str(row0[i]))
         book.save('new_dataset.xls')
