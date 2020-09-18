@@ -7,19 +7,19 @@ Created on Wed Sep  9 17:23:53 2020
 """
 
 import sympy
-from simpy.events import AllOf
 import pandas as pd
 import  xdrlib ,sys
 import xlrd
 import xlwt
-file = 'Data_set.xlsx'
 
-def open_excel(file= 'Data_set.xlsx'):
+file = 'test_data_estimation.xlsx'
+
+def open_excel(file= 'test_data_estimation.xlsx'):
     try:
         data = xlrd.open_workbook(file)
         return data
     except Exception:
-        print (str(e))
+        print ('e')
 
 #get data from excel based on the name   parameters:file：Excel path     colnameindex：index of column name  ，by_name：name of Sheet1
 def set_style(name,height,bold=False):
@@ -36,11 +36,11 @@ def feasible_dataset():
     time_max = xlrd.open_workbook('time_range.xlsx').sheet_by_name('Sheet1').col_values(2)[1:]
     return time_max
     
-def excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1'):
+def excel_table_byname(file= 'test_data_estimation.xlsx', colnameindex=0, by_name=u'Sheet1'):
     time_max = feasible_dataset()
-    data = open_excel(file) #open excel
-    table = data.sheet_by_name(by_name) #get sheet from excel file based on sheet name
-   # nrows = table.nrows #number of rows
+    data = open_excel(file) ##open excel
+    table = data.sheet_by_name(by_name)#get sheet from excel file based on sheet name
+   # nrows = table.nrows #行数 
     stakeholders = table.col_values(1)[1:] #data of one col
     book = xlwt.Workbook() #create an Excel
     sheet1 = book.add_sheet('new_dataset') #creat a sheet
@@ -59,15 +59,14 @@ def excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1')
         if j == 1.0:
             row=table.row_values(t)
             row.pop(1)
-            row1 = row[0:len(row)-3]
-            for m in row1:
-                if type(m) is float:
-                    if m <= time_max[y]:
-                        row1 = [' ' if x == m else x for x in row1]
-            y = y+1
-            for i in range(0,len(row1)+3):
-                row2=row1+row[-3:]
-                print(row2)
+            row1 = row[0:len(row)-7]
+            # for m in row1:
+            #     if type(m) is float:
+            #         if m <= time_max[y]:
+            #             row1 = [' ' if x == m else x for x in row1]
+            # y = y+1
+            for i in range(0,len(row1)+7):
+                row2=row1+row[-7:]
                 sheet1.write(c,i,str(row2[i]),set_style('Times New Roman',220,True))
                 book.save('new_dataset.xls')
             c = c+1
@@ -75,6 +74,6 @@ def excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1')
     return 'new_dataset.xls'
 
 if __name__ =="__main__":
-  excel_table_byname(file= 'Data_set.xlsx', colnameindex=0, by_name=u'Sheet1')
+  excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'Sheet1')
 
 
