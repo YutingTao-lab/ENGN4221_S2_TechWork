@@ -51,11 +51,11 @@ def data_step():
     return dict_data
 
 def low_var_data():
-    time_lmax = xlrd.open_workbook('ideal_range.xls').sheet_by_name('sheet1').col_values(1)[1:]
+    time_lmax = xlrd.open_workbook('ideal_range.xls').sheet_by_name('sheet1').col_values(2)[1:]
     return time_lmax
 
 def High_var_data():
-    time_hmax = xlrd.open_workbook('ideal_range.xls').sheet_by_name('sheet1').col_values(2)[1:]
+    time_hmax = xlrd.open_workbook('ideal_range.xls').sheet_by_name('sheet1').col_values(4)[1:]
     return time_hmax
 
 def loop_and_steps():
