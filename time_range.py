@@ -85,7 +85,7 @@ def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sh
     [c,d] = large_bounds.shape
     for i in range(c):
         for j in range(d):
-            sheet1.write(i+2,j+2,large_bounds[i,j])
+            sheet1.write(i+1,j+3,large_bounds[i,j])
             book.save('ideal_range.xls')
         
         
