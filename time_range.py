@@ -69,7 +69,7 @@ def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sh
     stddev.pop(0)
 
     [h,l] = set_matrix_array.shape
-    #due to the small sample size, using t-distribution, the confidence level is 95%
+    #due to the small sample size, using t-distribution, the confidence level is ?%
     t_bounds = t.interval(0.9, l - 1,mean,stddev)
     t_bounds = np.vstack(t_bounds)
     t_bounds = t_bounds.transpose()
@@ -78,7 +78,15 @@ def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sh
         for j in range(b):
             sheet1.write(i+1, j+1, t_bounds[i, j])
             book.save('ideal_range.xls')
-        
+    
+    large_bounds = t.interval(0.98, l - 1,mean,stddev)
+    large_bounds = np.vstack(large_bounds)
+    large_bounds = large_bounds.transpose()
+    [c,d] = large_bounds.shape
+    for i in range(c):
+        for j in range(d):
+            sheet1.write(i+2,j+2,large_bounds[i,j])
+            book.save('ideal_range.xls')
         
         
         
