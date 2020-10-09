@@ -15,7 +15,6 @@ def open_excel(file= 'Data_estimation.xls'):
     except Exception:
         print (str(e))
 
-#根据名称获取Excel表格中的数据   参数:file：Excel文件路径     colnameindex：表头列名所在行的索引  ，by_name：Sheet1名称
 def set_style(name,height,bold=False):
 	style = xlwt.XFStyle()
 	font = xlwt.Font()
@@ -27,9 +26,9 @@ def set_style(name,height,bold=False):
 	return style
 
 def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sheet1'):
-    data = open_excel(file) #打开excel文件
-    table = data.sheet_by_name(by_name)#根据sheet名字来获取excel中的sheet
-    book = xlwt.Workbook() #创建一个Excel
+    data = open_excel(file) #open excel file
+    table = data.sheet_by_name(by_name) #obtain data from excel file
+    book = xlwt.Workbook() #create a new excel file
     sheet1 = book.add_sheet('sheet1')
     col0 = ['Stage Loop','Loop A', 'Loop B','Loop C', 'Loop D']
     i = 0
