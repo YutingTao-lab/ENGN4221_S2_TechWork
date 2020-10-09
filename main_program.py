@@ -43,6 +43,7 @@ for i in range(0,20):
             dict_step.get(step).append(step_value)
         else:
             dict_step.setdefault(step,[]).append(step_value)
+# find the type of problem with highest frequency corresponding to each step
 k=1
 for i in steps:
     N = 0
@@ -55,7 +56,7 @@ for i in steps:
     G = 0
     H = 0
     get_value = dict_step[i]
-    # print(get_value)
+
     for j in range(len(get_value)):
         if get_value[j] == 'type A':
             A = A +1
