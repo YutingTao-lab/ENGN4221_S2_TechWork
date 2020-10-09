@@ -97,6 +97,7 @@ def define_error_data():
     for i in range(0,len(steps)):
         step_type.write(i+1,0,steps[i])
         time_set.save('ideal_range.xls')
+    #Define error data and problem types
     #Evaluate and classify steps that can be improved
     r = 0
     for j in range(0,len(steps)):
