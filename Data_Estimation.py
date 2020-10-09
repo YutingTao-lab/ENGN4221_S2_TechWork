@@ -34,7 +34,7 @@ def set_style(name,height,bold=False):
 def excel_table_byname():
     data = open_excel(file) #Open excel
     table = data.sheet_by_name(by_name)#obtain the sheet in Excel file by name
-    book = xlwt.Workbook() #create Excel file
+    book = xlwt.Workbook() #create Excel file to store the estimated data
     sheet1 = book.add_sheet('sheet1')
 
     col0=table.col_values(0)
@@ -47,7 +47,7 @@ def excel_table_byname():
         sheet1.write(j,1,col1[j])
         book.save('Data_estimation.xls')
     
-#find random number generation range    
+#find the range of the data    
     max_value = table.col_values(-5) 
     max_value.pop(0)
     est_max = table.col_values(-1)
