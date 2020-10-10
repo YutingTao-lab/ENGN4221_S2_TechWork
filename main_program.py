@@ -16,7 +16,7 @@ import xlrd
 from xlutils.copy import copy
 
 Data_Estimation.excel_table_byname()
-time_range.excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sheet1')
+time_range.excel_table_byname()
 step_ana1 = step_evaluation1.excel_table(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sheet1')
 newdata = xlrd.open_workbook('new_dataset.xls')
 step_ana = newdata.sheet_by_name('new_dataset')
@@ -33,7 +33,7 @@ step_type.write(0,0,'improvable steps')
 step_type.write(0,1,'step types')
 time_set.save('ideal_range.xls')
 
-for i in range(0,20):
+for i in range(0,100):
     values = list(define_step_type.define_error_data().values())
     for j in range(len(steps)):
         # print(values,j)
@@ -43,7 +43,6 @@ for i in range(0,20):
             dict_step.get(step).append(step_value)
         else:
             dict_step.setdefault(step,[]).append(step_value)
-# find the type of problem with highest frequency corresponding to each step
 k=1
 for i in steps:
     N = 0
@@ -56,7 +55,7 @@ for i in steps:
     G = 0
     H = 0
     get_value = dict_step[i]
-
+    # print(get_value)
     for j in range(len(get_value)):
         if get_value[j] == 'type A':
             A = A +1
