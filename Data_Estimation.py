@@ -83,7 +83,7 @@ def excel_table_byname():
     for a in range(0,len(max_value)):
         # dist = stats.truncnorm((min_value[a]-mean_value[a])/stddev[a], (max_value[a]-mean_value[a])/stddev[a], loc = mean_value[a], scale = stddev[a])
         dist = stats.norm(loc=mean_value[a],scale=stddev[a])
-        data = dist.rvs(size=30)
+        data = dist.rvs(size=100)
 
         # dist = np.random.normal(loc=mean_value[a],scale=stddev[a],size=30)
         # data = dist.rvs(30) #as the collecting sample size is small and less than 30, 
@@ -101,7 +101,7 @@ def excel_table_byname():
             sheet1.write(b+1, c+2, m)
             book.save('Data_estimation.xls')
     
-    for i in range(30):
+    for i in range(100):
         sheet1.write(0,i+2,"estimated_set %d"%(int(i+1)))
         book.save('Data_estimation.xls')
     
