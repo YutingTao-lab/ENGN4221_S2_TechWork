@@ -6,16 +6,21 @@ Created on Wed Sep  9 17:26:56 2020
 @author: ziling
 """
 
-
+import Data_Estimation
 import xlrd
 import xlwt
+import math
 import numpy as np
 from scipy.stats import t
 
 
+file_sheet = Data_Estimation.input_file()
+file = file_sheet[0]
+by_name = file_sheet[1]
+# CI = float(input('Please input yout confidence inverval:'))
+CI = 0.6
 
-file = 'Data_estimation.xls'
-def open_excel(file= 'Data_estimation.xls'):
+def open_excel(file= 'Data_set.xls'):
     try:
         data = xlrd.open_workbook(file)
         return data
@@ -32,7 +37,7 @@ def set_style(name,height,bold=False):
 	style.font = font
 	return style
 
-def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sheet1'):
+def excel_table_byname():
     data = open_excel(file) #Open excel
     table = data.sheet_by_name(by_name)#obtain the sheet in Excel file by name
     book = xlwt.Workbook() #create Excel file
@@ -66,25 +71,35 @@ def excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sh
 
     [h,l] = set_matrix_array.shape
     #due to the small sample size, using t-distribution, the confidence level is 95%
-    t_bounds = t.interval(0.5, l - 1,mean,stddev)#####################
+    t_bounds = t.interval(CI, l - 1,mean,stddev)#
     t_bounds = np.vstack(t_bounds)
     t_bounds = t_bounds.transpose()
     [a, b] = t_bounds.shape
     for i in range(a):
         for j in range(b):
-            sheet1.write(i+1, j+1, t_bounds[i, j])
+            if t_bounds[i][j] <= 0:
+                t_bounds[i][j]=1
+            if math.isnan(t_bounds[i][j]):
+                t_bounds[i][j]=1
+    for m in range(a):
+        for n in range(b):
+            sheet1.write(m+1, n+1, t_bounds[m, n])
             book.save('ideal_range.xls')
-    large_bounds = t.interval(0.8, l - 1,mean,stddev)
+    large_bounds = t.interval(0.95, l - 1,mean,stddev)
     large_bounds = np.vstack(large_bounds)
     large_bounds = large_bounds.transpose()
     [c,d] = large_bounds.shape
     for i in range(c):
         for j in range(d):
-            sheet1.write(i+1,j+3,large_bounds[i,j])
+            if large_bounds[i][j] <= 0:
+                large_bounds[i][j]=1
+            if math.isnan(large_bounds[i][j]):
+                large_bounds[i][j]=1
+    for m in range(c):
+        for n in range(d):
+            sheet1.write(m+1,n+3,large_bounds[m,n])
             book.save('ideal_range.xls')
         
         
         
-        
-# if __name__ =="__main__":
-#   excel_table_byname(file= 'Data_estimation.xls', colnameindex=0, by_name=u'sheet1')
+       
