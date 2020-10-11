@@ -17,8 +17,8 @@ from scipy.stats import t
 file_sheet = Data_Estimation.input_file()
 file = file_sheet[0]
 by_name = file_sheet[1]
-# CI = float(input('Please input yout confidence inverval:'))
-CI = 0.6
+CI = float(input('Please input yout confidence inverval:'))
+# CI = 0.6
 
 def open_excel(file= 'Data_set.xls'):
     try:
@@ -102,4 +102,4 @@ def excel_table_byname():
         
         
         
-       
+        
