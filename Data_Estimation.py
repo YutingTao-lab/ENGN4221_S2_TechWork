@@ -12,10 +12,10 @@ import scipy.stats as stats
 from scipy import stats
 import numpy as np
 
-# file = input("Please input your file path for stage2:")
-# by_name = input("please input your sheet name in that file:")
-file = 'Data_set.xlsx'
-by_name = 'Sheet1'
+file = input("Please input your file path for stage2:")
+by_name = input("please input your sheet name in that file:")
+# file = 'Data_set.xlsx'
+# by_name = 'Sheet1'
 def open_excel(file):
     try:
         data = xlrd.open_workbook(file)
@@ -110,5 +110,4 @@ def excel_table_byname():
 
 def input_file():
         return [file, by_name]
-# if __name__ =="__main__":
-#   excel_table_byname()
+
