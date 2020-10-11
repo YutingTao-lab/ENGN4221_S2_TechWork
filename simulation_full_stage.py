@@ -14,8 +14,8 @@ from xlutils.copy import copy
 file_sheet = Data_Estimation.input_file()
 file = file_sheet[0]
 sheet_name = file_sheet[1]
-# full_stage_data=input('Please input your file path for full stage data:')
-full_stage_data = 'full_stage_data.xlsx'
+full_stage_data=input('Please input your file path for full stage data:')
+# full_stage_data = 'full_stage_data.xlsx'
 def open_excel(file):
     try:
         data = xlrd.open_workbook(file)
